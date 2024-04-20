@@ -8,5 +8,9 @@ ExplorePlaces is your ultimate travel companion, designed to help you discover t
 # Link to our Figma
 https://www.figma.com/file/Dx5NstWtPNoqsL0nObdHcZ/Flutter's-Project?type=design&node-id=0%3A1&mode=design&t=kUAqzapa7DH7y0P0-1
 
+# Command 
+```bash
+flutter run lib/main.dart
+```
 
 Developped by Amine Fajry, Nalvac Atinhounon, Robin Coblentz
