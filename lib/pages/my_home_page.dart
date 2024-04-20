@@ -3,7 +3,7 @@ import 'book_for_a_ride_page.dart';
 import 'natural_wonders_page.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key});
+  const MyHomePage({super.key});
 
   Widget _buildCategoryButton(
       String text, {
