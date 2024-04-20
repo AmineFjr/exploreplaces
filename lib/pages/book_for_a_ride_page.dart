@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BookForARidePage extends StatelessWidget {
-  const BookForARidePage({Key? key}) : super(key: key);
+  const BookForARidePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class BookForARidePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
                 style: TextStyle(fontSize: 15),
                 textAlign: TextAlign.center,
@@ -30,7 +30,7 @@ class BookForARidePage extends StatelessWidget {
               const SizedBox(height: 10.0),
               _buildText('Fill the Details'),
               const SizedBox(height: 10.0),
-              MyCustomForm(),
+              const MyCustomForm(),
             ],
           ),
         ),
@@ -43,7 +43,9 @@ class BookForARidePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         _buildVehicleOption('Car', 'assets/car.png'),
+        const SizedBox(width: 10.0),
         _buildVehicleOption('Bus', 'assets/bike.png'),
+        const SizedBox(width: 10.0),
         _buildVehicleOption('Bike', 'assets/bus.png'),
       ],
     );
@@ -65,7 +67,7 @@ class BookForARidePage extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
           color: Colors.blue,
@@ -77,7 +79,7 @@ class BookForARidePage extends StatelessWidget {
 }
 
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+  const MyCustomForm({super.key});
 
   @override
   MyCustomFormState createState() => MyCustomFormState();
@@ -108,9 +110,9 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextField('Country', 'John Doe'),
+          _buildTextField('Username'),
           const SizedBox(height: 20.0),
-          _buildTextField('Country', 'John Doe'),
+          _buildTextField('Country'),
           const SizedBox(height: 20.0),
           _buildTeamSizeInput(),
           const SizedBox(height: 20.0),
@@ -127,24 +129,39 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           const SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data')),
-                );
-              }
-            },
-            child: const Text('Submit'),
+          Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              height: 60, // adjust the height as needed
+              width: 200, // adjust the width as needed
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow, // this is the background color
+                ),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
+                  }
+                },
+                child: const Text('Submit',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildTextField(String labelText, String initialValue) {
+  Widget _buildTextField(String labelText) {
     return TextFormField(
-      initialValue: initialValue,
       decoration: InputDecoration(
         labelText: labelText,
       ),
