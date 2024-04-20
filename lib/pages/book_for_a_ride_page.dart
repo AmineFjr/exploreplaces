@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
-class BookForARidePage extends StatelessWidget {
+class BookForARidePage extends StatefulWidget {
   const BookForARidePage({super.key});
+
+  @override
+  State<BookForARidePage> createState() => _BookForARidePageState();
+}
+
+class _BookForARidePageState extends State<BookForARidePage> {
+  String? selectedVehicle;
+
+  String? get getSelectedVehicle {
+    return selectedVehicle;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,7 @@ class BookForARidePage extends StatelessWidget {
               const SizedBox(height: 10.0),
               _buildText('Fill the Details'),
               const SizedBox(height: 10.0),
-              const MyCustomForm(),
+              MyCustomForm(selectedVehicle: selectedVehicle),
             ],
           ),
         ),
@@ -42,22 +53,49 @@ class BookForARidePage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        _buildVehicleOption('Car', 'assets/car.png'),
+        Flexible(
+          child: _buildVehicleOption('Car', 'assets/car.png'),
+        ),
         const SizedBox(width: 10.0),
-        _buildVehicleOption('Bus', 'assets/bike.png'),
+        Flexible(
+          child: _buildVehicleOption('Bus', 'assets/bus.png'),
+        ),
         const SizedBox(width: 10.0),
-        _buildVehicleOption('Bike', 'assets/bus.png'),
+        Flexible(
+          child: _buildVehicleOption('Bike', 'assets/bike.png'),
+        ),
       ],
     );
   }
 
   Widget _buildVehicleOption(String title, String assetPath) {
-    return Flexible(
-      child: Column(
-        children: [
-          Image(image: AssetImage(assetPath)),
-          Text(title),
-        ],
+    bool isSelected = selectedVehicle == title;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          if (isSelected) {
+            selectedVehicle = null; // Deselect the vehicle if it's already selected
+          } else {
+            selectedVehicle = title; // Select the vehicle if it's not selected
+          }
+        });
+      },
+      splashColor: Colors.white10,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blue : Colors.transparent,
+          border: Border.all(color: Colors.blue), // Add border for all options
+        ),
+        child: Column(
+          children: [
+            Image.asset(
+              assetPath,
+              width: 100,
+              height: 100,
+            ),
+            Text(title),
+          ],
+        ),
       ),
     );
   }
@@ -79,7 +117,9 @@ class BookForARidePage extends StatelessWidget {
 }
 
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+  final String? selectedVehicle;
+
+  const MyCustomForm({super.key, this.selectedVehicle});
 
   @override
   MyCustomFormState createState() => MyCustomFormState();
@@ -88,6 +128,9 @@ class MyCustomForm extends StatefulWidget {
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   int counter = 0;
+  String? username;
+  String? country;
+  String get selectedVehicle => widget.selectedVehicle!;
 
   void incrementCounter() {
     setState(() {
@@ -110,9 +153,9 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextField('Username'),
+          _buildTextField('Username', (value) => username = value),
           const SizedBox(height: 20.0),
-          _buildTextField('Country'),
+          _buildTextField('Country', (value) => country = value),
           const SizedBox(height: 20.0),
           _buildTeamSizeInput(),
           const SizedBox(height: 20.0),
@@ -140,12 +183,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
+                    // Call a function to handle form submission
+                    _submitForm();
                   }
                 },
-                child: const Text('Submit',
+                child: const Text(
+                  'Submit',
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -160,7 +203,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 
-  Widget _buildTextField(String labelText) {
+  Widget _buildTextField(String labelText, void Function(String?) onChanged) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: labelText,
@@ -171,6 +214,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         }
         return null;
       },
+      onChanged: onChanged,
     );
   }
 
@@ -231,5 +275,13 @@ class MyCustomFormState extends State<MyCustomForm> {
         ),
       ],
     );
+  }
+
+  void _submitForm() {
+
+    print('Username: $username');
+    print('Country: $country');
+    print(selectedVehicle);
+    print('Team Size: $counter');
   }
 }
