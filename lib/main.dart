@@ -5,12 +5,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mon Application',
+      title: 'Explore Places',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -20,144 +20,141 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key});
+
+  Widget _buildCategoryButton(
+      String text, {
+        required VoidCallback onPressed,
+        Color? backgroundColor,
+      }) {
+    return Flexible(
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(200, 100),
+          foregroundColor: Colors.black,
+          backgroundColor: backgroundColor ?? const Color(0xFF8E8FFA),
+          padding: const EdgeInsets.all(20),
+          textStyle: const TextStyle(fontSize: 18.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        child: Text(text),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Explore Places'),
+          title: const Text('Explore'),
+          centerTitle: false
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 20.0),
-              const Text(
-                "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
-                style: TextStyle(
-                  fontSize: 18.0,
+              Container(
+                margin: const EdgeInsets.only(left: 10.0), // Adjust the value as needed
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Places',
+                    style: TextStyle(
+                      fontSize: 50.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              const Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
+                      style: TextStyle(fontSize: 15),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30.0),
               const Image(
                 image: AssetImage("assets/image-home-page.png"),
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 10.0),
               const Text(
                 'Select a Place from the categories',
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
                 ),
+                softWrap: true,
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
+                children: <Widget>[
+                  _buildCategoryButton(
+                    'Natural Wonders',
                     onPressed: () {
-                      // Action du premier bouton
+                      // Navigate to the NaturalWondersPage
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NaturalWondersPage()),
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(200, 100),
-                      foregroundColor:
-                        Colors.black,
-                      backgroundColor:
-                        const Color(0xFF8E8FFA),
-                      padding:
-                        const EdgeInsets.all(20),
-                      textStyle:
-                        const TextStyle(fontSize: 18.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text('Natural Wonders'),
                   ),
-                  ElevatedButton(
+                  const SizedBox(width: 20.0),
+                  _buildCategoryButton(
+                    'Nightlife',
                     onPressed: () {
                       // Action du deuxième bouton
                     },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(200, 100),
-                      foregroundColor:
-                      Colors.black,
-                      backgroundColor:
-                      const Color(0xFF8E8FFA),
-                      padding:
-                        const EdgeInsets.all(20),
-                      textStyle:
-                      const TextStyle(fontSize: 18.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text('Nightlife'),
                   ),
                 ],
               ),
               const SizedBox(height: 20.0),
-              Row (
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
+                children: <Widget>[
+                  _buildCategoryButton(
+                    'Landmarks',
                     onPressed: () {
                       // Action du troisième bouton
                     },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(200, 100),
-                      foregroundColor:
-                      Colors.black,
-                      backgroundColor:
-                        const Color(0xFFC2D9FF),
-                      padding:
-                        const EdgeInsets.all(20),
-                      textStyle:
-                      const TextStyle(fontSize: 18.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text('Landmarks'),
+                    backgroundColor: const Color(0xFFC2D9FF),
                   ),
-                  ElevatedButton(
+                  const SizedBox(width: 10.0),
+                  _buildCategoryButton(
+                    'Cultural',
                     onPressed: () {
                       // Action du quatrième bouton
                     },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(200, 100),
-                      foregroundColor:
-                        Colors.black,
-                      backgroundColor:
-                        const Color(0xFFC2D9FF),
-                      padding:
-                        const EdgeInsets.all(20),
-                      textStyle:
-                      const TextStyle(fontSize: 18.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text('Cultural'),
+                    backgroundColor: const Color(0xFFC2D9FF),
                   ),
                 ],
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  // Action du dernier bouton en bas
+                  // Navigate to the NaturalWondersPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BookForARidePage()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(400, 100),
-                  foregroundColor:
-                  Colors.black,
-                  backgroundColor:
-                  const Color(0xFFFFE500),
-                  textStyle:
-                  const TextStyle(fontSize: 18.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: const Color(0xFFFFE500),
+                  textStyle: const TextStyle(fontSize: 18.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -167,6 +164,39 @@ class MyHomePage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+// New Page for Natural Wonders
+class NaturalWondersPage extends StatelessWidget {
+  const NaturalWondersPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Natural Wonders'),
+      ),
+      body: const Center(
+        child: Text('Natural Wonders Page'),
+      ),
+    );
+  }
+}
+
+class BookForARidePage extends StatelessWidget {
+  const BookForARidePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Book For A Ride'),
+      ),
+      body: const Center(
+        child: Text('Book For A Ride Page'),
       ),
     );
   }
