@@ -1,5 +1,5 @@
+import 'package:exploreplaces/pages/login.dart';
 import 'package:flutter/material.dart';
-import 'pages/my_home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Explore Places',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const Login(),
     );
   }
 }
