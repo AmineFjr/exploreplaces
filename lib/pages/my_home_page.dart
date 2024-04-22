@@ -114,7 +114,6 @@ class MyHomePage extends StatelessWidget {
                   _buildCategoryButton(
                     'Natural Wonders',
                     onPressed: () {
-                      // Navigate to the NaturalWondersPage
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const NaturalWondersPage()),
@@ -125,7 +124,6 @@ class MyHomePage extends StatelessWidget {
                   _buildCategoryButton(
                     'Nightlife',
                     onPressed: () {
-                      // Action du deuxième bouton
                     },
                   ),
                 ],
@@ -137,7 +135,6 @@ class MyHomePage extends StatelessWidget {
                   _buildCategoryButton(
                     'Landmarks',
                     onPressed: () {
-                      // Action du troisième bouton
                     },
                     backgroundColor: const Color(0xFFC2D9FF),
                   ),
@@ -145,7 +142,6 @@ class MyHomePage extends StatelessWidget {
                   _buildCategoryButton(
                     'Cultural',
                     onPressed: () {
-                      // Action du quatrième bouton
                     },
                     backgroundColor: const Color(0xFFC2D9FF),
                   ),
@@ -156,7 +152,6 @@ class MyHomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to the BookForARidePage
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const BookForARidePage()),

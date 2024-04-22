@@ -358,11 +358,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
   Future<void> _submitForm() async {
-    print('username: $username');
-    print('country: $country');
-    print('vehicle: $selectedVehicle');
-    print('team size: $counter');
-    print('selected place: ');
+    // Code existant...
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: 'srv1015.hstgr.io', user: 'u986651684_admin', password: 'esgiLYON2024', db: 'u986651684_exploreplaces'
     ));
@@ -374,5 +370,14 @@ class MyCustomFormState extends State<MyCustomForm> {
         [username, country, selectedVehicle, counter, 'Cultural']
     );
     await conn.close();
+
+    Navigator.of(context).pop();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Your booking has been successfully submitted!'),
+      ),
+    );
   }
+
 }

@@ -163,11 +163,10 @@ class SignUpState extends State<SignUp> {
 
 Widget _buildLoginButton() {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.end, // Aligner le contenu à droite
+    mainAxisAlignment: MainAxisAlignment.end,
     children: [
       TextButton(
         onPressed: () {
-          // Naviguer vers la page de connexion
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const Login()),
