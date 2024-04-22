@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
 
+import '../SQLConnection.dart';
+
 class BookForARidePage extends StatefulWidget {
   const BookForARidePage({super.key});
 
@@ -358,10 +360,10 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
   Future<void> _submitForm() async {
-    // Code existant...
-    final conn = await MySqlConnection.connect(ConnectionSettings(
-        host: 'srv1015.hstgr.io', user: 'u986651684_admin', password: 'esgiLYON2024', db: 'u986651684_exploreplaces'
-    ));
+
+    final $sqlConnection = SQLConnection();
+    final conn = await $sqlConnection.connect();
+
     await conn.query(
         "CREATE TABLE IF NOT EXISTS booking (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), country VARCHAR(255), vehicle VARCHAR(255), team_size INT, selected_place VARCHAR(255))"
     );
@@ -369,6 +371,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         "INSERT INTO booking (username, country, vehicle, team_size, selected_place) VALUES (?, ?, ?, ?, ?)",
         [username, country, selectedVehicle, counter, 'Cultural']
     );
+
     await conn.close();
 
     Navigator.of(context).pop();
