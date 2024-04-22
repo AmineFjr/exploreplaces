@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:mysql1/mysql1.dart';
+import 'package:http/http.dart' as http;
 
 class BookForARidePage extends StatefulWidget {
   const BookForARidePage({Key? key}) : super(key: key);
@@ -356,10 +360,22 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 
-  void _submitForm() {
-    print('Username: $username');
-    print('Country: $country');
-    print(selectedVehicle);
-    print('Team Size: $counter');
+  Future<void> _submitForm() async {
+    print('username: $username');
+    print('country: $country');
+    print('vehicle: $selectedVehicle');
+    print('team size: $counter');
+    print('selected place: ');
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: 'srv1015.hstgr.io', user: 'u986651684_admin', password: 'esgiLYON2024', db: 'u986651684_exploreplaces'
+    ));
+    await conn.query(
+        "CREATE TABLE IF NOT EXISTS booking (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), country VARCHAR(255), vehicle VARCHAR(255), team_size INT, selected_place VARCHAR(255))"
+    );
+    await conn.query(
+        "INSERT INTO booking (username, country, vehicle, team_size, selected_place) VALUES (?, ?, ?, ?, ?)",
+        [username, country, selectedVehicle, counter, 'Cultural']
+    );
+    await conn.close();
   }
 }
