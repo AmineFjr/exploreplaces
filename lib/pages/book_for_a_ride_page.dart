@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
-import 'package:http/http.dart' as http;
 
 class BookForARidePage extends StatefulWidget {
-  const BookForARidePage({Key? key}) : super(key: key);
+  const BookForARidePage({super.key});
 
   @override
   State<BookForARidePage> createState() => _BookForARidePageState();
@@ -83,9 +80,9 @@ class _BookForARidePageState extends State<BookForARidePage> {
       onTap: () {
         setState(() {
           if (isSelected) {
-            selectedVehicle = null; // Deselect the vehicle if it's already selected
+            selectedVehicle = null;
           } else {
-            selectedVehicle = title; // Select the vehicle if it's not selected
+            selectedVehicle = title;
           }
         });
       },
@@ -125,11 +122,11 @@ Widget _buildTextWithBackgroundImage() {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           image: DecorationImage(
-            image: const AssetImage('cultural1.png'),
+            image: const AssetImage('assets/cultural1.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3), // Opacité du voile (30%)
-              BlendMode.darken, // Mode de fusion pour assombrir l'image
+              Colors.black.withOpacity(0.3),
+              BlendMode.darken,
             ),
           ),
         ),
@@ -158,23 +155,23 @@ Widget _buildTextWithBackgroundImage() {
               const SizedBox(height: 20.0),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6), // Couleur d'arrière-plan légèrement opaque
-                  borderRadius: BorderRadius.circular(20.0), // Bords arrondis
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0), // Espacement interne
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Espacement entre les étoiles
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildStarIcon(),
-                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    const SizedBox(width: 4.0),
                     _buildStarIcon(),
-                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    const SizedBox(width: 4.0),
                     _buildStarIcon(),
-                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    const SizedBox(width: 4.0),
                     _buildStarIcon(),
-                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    const SizedBox(width: 4.0),
                     _buildStarIcon(),
-                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    const SizedBox(width: 4.0),
                   ],
                 ),
               ),
@@ -190,7 +187,7 @@ Widget _buildStarIcon() {
   return const Icon(
     Icons.star,
     color: Colors.yellow,
-    size: 28.0, // Taille légèrement agrandie
+    size: 28.0,
   );
 }
 

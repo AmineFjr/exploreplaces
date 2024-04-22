@@ -167,7 +167,7 @@ class LoginState extends State<Login> {
             MaterialPageRoute(builder: (context) => const MyHomePage()),
           );
         },
-        child: Text("LOGIN"),
+        child: const Text("LOGIN"),
       ),
     );
   }
@@ -176,13 +176,12 @@ class LoginState extends State<Login> {
     return Center(
       child: OutlinedButton(
         onPressed: () {
-          // Naviguer vers la page d'inscription
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SignUp()),
           );
         },
-        child: Text("Sign Up"),
+        child: const Text("Sign Up"),
       ),
     );
   }
