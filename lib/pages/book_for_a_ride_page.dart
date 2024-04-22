@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BookForARidePage extends StatefulWidget {
-  const BookForARidePage({super.key});
+  const BookForARidePage({Key? key}) : super(key: key);
 
   @override
   State<BookForARidePage> createState() => _BookForARidePageState();
@@ -9,10 +9,6 @@ class BookForARidePage extends StatefulWidget {
 
 class _BookForARidePageState extends State<BookForARidePage> {
   String? selectedVehicle;
-
-  String? get getSelectedVehicle {
-    return selectedVehicle;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +28,21 @@ class _BookForARidePageState extends State<BookForARidePage> {
               const Text(
                 "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
                 style: TextStyle(fontSize: 15),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
+              ),
+              const SizedBox(height: 10.0),
+              const Text(
+                'Explore and Book Your Adventure',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(158, 0, 255, 1),
+                ),
               ),
               const SizedBox(height: 20.0),
               _buildVehicleSelection(),
               const SizedBox(height: 20.0),
-              _buildText('Select Place'),
+              _buildTextWithBackgroundImage(),
               const SizedBox(height: 10.0),
               _buildText('Fill the Details'),
               const SizedBox(height: 10.0),
@@ -83,22 +88,108 @@ class _BookForARidePageState extends State<BookForARidePage> {
       splashColor: Colors.white10,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.transparent,
-          border: Border.all(color: Colors.blue), // Add border for all options
+          color: isSelected ? const Color(0xFFC2D9FF) : Colors.transparent,
+          borderRadius: BorderRadius.circular(10.0),
         ),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Image.asset(
-              assetPath,
-              width: 100,
-              height: 100,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset(
+                assetPath,
+                width: 100,
+                height: 100,
+              ),
             ),
-            Text(title),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color.fromRGBO(142, 143, 255, 1),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
+Widget _buildTextWithBackgroundImage() {
+  return Stack(
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          image: DecorationImage(
+            image: const AssetImage('cultural1.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.3), // Opacité du voile (30%)
+              BlendMode.darken, // Mode de fusion pour assombrir l'image
+            ),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Selected Place',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              const Text(
+                "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility visit offers something for every traveler.",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6), // Couleur d'arrière-plan légèrement opaque
+                  borderRadius: BorderRadius.circular(20.0), // Bords arrondis
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0), // Espacement interne
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Espacement entre les étoiles
+                  children: [
+                    _buildStarIcon(),
+                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    _buildStarIcon(),
+                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    _buildStarIcon(),
+                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    _buildStarIcon(),
+                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                    _buildStarIcon(),
+                    const SizedBox(width: 4.0), // Espacement entre les étoiles
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _buildStarIcon() {
+  return const Icon(
+    Icons.star,
+    color: Colors.yellow,
+    size: 28.0, // Taille légèrement agrandie
+  );
+}
+
 
   Widget _buildText(String text) {
     return Align(
@@ -108,7 +199,7 @@ class _BookForARidePageState extends State<BookForARidePage> {
         style: const TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
-          color: Colors.blue,
+          color: Color.fromRGBO(158, 0, 255, 1),
         ),
         softWrap: true,
       ),
@@ -119,7 +210,7 @@ class _BookForARidePageState extends State<BookForARidePage> {
 class MyCustomForm extends StatefulWidget {
   final String? selectedVehicle;
 
-  const MyCustomForm({super.key, this.selectedVehicle});
+  const MyCustomForm({Key? key, this.selectedVehicle}) : super(key: key);
 
   @override
   MyCustomFormState createState() => MyCustomFormState();
@@ -127,7 +218,7 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  int counter = 0;
+  int counter = 1;
   String? username;
   String? country;
   String get selectedVehicle => widget.selectedVehicle!;
@@ -164,26 +255,19 @@ class MyCustomFormState extends State<MyCustomForm> {
             height: 1,
           ),
           const SizedBox(height: 10.0),
-          const Text(
-            "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.black,
-            ),
-          ),
+         
           const SizedBox(height: 20.0),
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
-              height: 60, // adjust the height as needed
-              width: 200, // adjust the width as needed
+              height: 60,
+              width: 200,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow, // this is the background color
+                  backgroundColor: Colors.yellow,
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Call a function to handle form submission
                     _submitForm();
                   }
                 },
@@ -226,16 +310,11 @@ class MyCustomFormState extends State<MyCustomForm> {
           'Team Size',
           style: TextStyle(
             fontSize: 16.0,
+            color: Color.fromRGBO(110, 112, 118, 1),
           ),
         ),
-        const Text(
-          'Add Or remove a team member',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        ),
+        const SizedBox(height: 10.0),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -278,7 +357,6 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
   void _submitForm() {
-
     print('Username: $username');
     print('Country: $country');
     print(selectedVehicle);
