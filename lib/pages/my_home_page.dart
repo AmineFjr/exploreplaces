@@ -3,18 +3,18 @@ import 'book_for_a_ride_page.dart';
 import 'natural_wonders_page.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key});
 
   Widget _buildCategoryButton(
-      String text, {
-        required VoidCallback onPressed,
-        Color? backgroundColor,
-      }) {
+    String text, {
+    required VoidCallback onPressed,
+    Color? backgroundColor,
+  }) {
     return Flexible(
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(200, 100),
+          minimumSize: const Size(200, 100),
           foregroundColor: Colors.black,
           backgroundColor: backgroundColor ?? const Color(0xFF8E8FFA),
           padding: const EdgeInsets.all(20),
@@ -23,7 +23,13 @@ class MyHomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text(text),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -32,57 +38,78 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Explore'),
-          centerTitle: false
+        title: const Text(
+          'Explore',
+          style: TextStyle(
+            color: Color.fromRGBO(110, 122, 118, 1),
+            fontSize: 20.0,
+          ),
+        ),
+        centerTitle: false,
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(left: 10.0), // Adjust the value as needed
+                margin: const EdgeInsets.only(left: 20.0),
                 child: const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Places',
                     style: TextStyle(
-                      fontSize: 50.0,
+                      fontSize: 48.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: Color.fromRGBO(158, 0, 255, 1),
                     ),
                   ),
                 ),
               ),
-              const Column(
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
-                      style: TextStyle(fontSize: 15),
-                      textAlign: TextAlign.center,
+              const SizedBox(height: 10.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Align(
+                  child: Text(
+                    "Welcome to our travel app, your ultimate guide to discovering captivating destinations around the globe! Whether you're seeking the tranquility of scenic landscapes, the allure of historical landmarks, or the excitement of vibrant cities, our curated collection of places to visit offers something for every traveler.",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color.fromRGBO(110, 122, 118, 1),
                     ),
+                    textAlign: TextAlign.left,
                   ),
-                ],
+                ),
               ),
               const SizedBox(height: 30.0),
-              const Image(
-                image: AssetImage("assets/image-home-page.png"),
-              ),
-              const SizedBox(height: 10.0),
-              const Text(
-                'Select a Place from the categories',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              const FractionallySizedBox(
+                widthFactor: 1.0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Image(
+                    image: AssetImage("assets/image-home-page.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                softWrap: true,
               ),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 20.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Select a Place from the categories',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(158, 0, 255, 1),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _buildCategoryButton(
                     'Natural Wonders',
@@ -94,7 +121,7 @@ class MyHomePage extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(width: 20.0),
+                  const SizedBox(width: 10.0),
                   _buildCategoryButton(
                     'Nightlife',
                     onPressed: () {
@@ -103,9 +130,9 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 10.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _buildCategoryButton(
                     'Landmarks',
@@ -125,24 +152,36 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to the NaturalWondersPage
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const BookForARidePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(400, 100),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color(0xFFFFE500),
-                  textStyle: const TextStyle(fontSize: 18.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigate to the BookForARidePage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BookForARidePage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 100),
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color(0xFFFFE500),
+                    textStyle: const TextStyle(fontSize: 20.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      'Book For A Ride Today!',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-                child: const Text('Book For A Ride Today!'),
               ),
             ],
           ),
