@@ -13,4 +13,5 @@ https://www.figma.com/file/Dx5NstWtPNoqsL0nObdHcZ/Flutter's-Project?type=design&
 flutter run lib/main.dart
 ```
 
-Developped by Amine Fajry, Nalvac Atinhounon, Robin Coblentz
+Developped by Amine Fajry, Nalvac Atinhounon, Robin Coblentz  
+M2 IW
